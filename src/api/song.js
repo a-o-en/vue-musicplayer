@@ -2,7 +2,7 @@ import axios from 'axios'
 import {commomParams} from './config'
 
 export function getLyric1 (songmid) {
-  const url = 'api/getLyric'
+  const url = 'http://192.168.42.167:3000/getLyric'
   const data = Object.assign({}, commomParams, {
     pcachetime: +new Date(),
     songmid: songmid,

@@ -15,7 +15,7 @@ export function getHotKey () {
 }
 
 export function search (query, page, zhida, perpage) {
-  const url = 'api/search'
+  const url = 'http://192.168.42.167:3000/search'
   const data = Object.assign({}, commomParams, {
     w: query,
     p: page,

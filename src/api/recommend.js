@@ -34,7 +34,7 @@ export function getDiscList2 () {
   return axios.get(url, {
     params: data
   }).then((res) => {
-    console.log('recommend里面的res:')
+    // console.log('recommend里面的res:')
     return Promise.resolve(res.data)
   })
 }

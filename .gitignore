@@ -1,0 +1,16 @@
+.DS_Store
+node_modules/
+/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+#chn2017_lyc@163.com
+#/c/Users/hp/.ssh/id_rsa

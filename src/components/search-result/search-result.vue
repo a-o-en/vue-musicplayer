@@ -77,6 +77,7 @@
         } else {
           this.insertSong(item)
         }
+        this.$emit('select')
       },
       // 上拉刷新
       searchMore () {

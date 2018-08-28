@@ -1,4 +1,5 @@
 import {playMode} from 'commom/js/config'
+import {loadStorage} from '../api/cache'
 
 const state = {
   kinds: [-100, -100, -100, -100], // index, area, sex, genre
@@ -11,6 +12,7 @@ const state = {
   currentIndex: -1,
   disc: {},
   topList: {},
-  query: ''
+  query: '',
+  searchHistory: loadStorage()
 }
 export default state

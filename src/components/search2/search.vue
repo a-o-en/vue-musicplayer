@@ -1,7 +1,7 @@
 <template>
   <transition name="search">
     <div class="search">
-      <search-result v-show="query"></search-result>
+      <search-result v-show="query" @select="saveSearch"></search-result>
       <div class="shortcut-wrapper" v-show="!query">
         <div class="shortcut">
           <div class="hot-key">
@@ -11,6 +11,21 @@
                 <span>{{item.k}}</span>
               </li>
             </ul>
+          </div>
+          <div class="search-history" v-show="searchHistory.length">
+            <h1 class="title">
+              <span class="text">搜索历史</span>
+              <span class="clear" @click="deleteAll">
+                <i class="iconfont icon-delete"></i>
+              </span>
+            </h1>
+            <search-list
+              :searches="searchHistory"
+              @select="addQuery"
+              @delete="deleteOne"
+            >
+
+            </search-list>
           </div>
         </div>
       </div>
@@ -22,8 +37,9 @@
   import SearchBox from 'base/search-box/search-box'
   import {getHotKey} from 'api/search'
   import {ERR_OK} from 'api/config'
-  import {mapMutations, mapGetters} from 'vuex'
+  import {mapMutations, mapGetters, mapActions} from 'vuex'
   import SearchResult from '@/components/search-result/search-result'
+  import SearchList from 'base/search-list/search-list'
 
   export default {
     data () {
@@ -46,18 +62,35 @@
           }
         })
       },
+      saveSearch () {
+        this.saveSearchHistory(this.query)
+      },
+      deleteOne (item) {
+        this.deleteSearchHistory(item)
+      },
+      deleteAll () {
+        this.clearSearchHistory()
+      },
       ...mapMutations({
         'setQuery': 'SET_QUERY'
-      })
+      }),
+      ...mapActions([
+        'saveSearchHistory',
+        'deleteSearchHistory',
+        'clearSearchHistory',
+        'searching'
+      ])
     },
     computed: {
       ...mapGetters([
-        'query'
+        'query',
+        'searchHistory'
       ])
     },
     components: {
       SearchBox,
-      SearchResult
+      SearchResult,
+      SearchList
     }
   }
 </script>
@@ -91,6 +124,20 @@
             font-size: @font-size-medium;
             color: @color-text-black;
             border: 1px solid @color-text-black-d;
+          }
+        }
+        .search-history {
+          padding: 0 20px;
+          .title {
+            padding-bottom: 20px;
+            display: flex;
+            font-size: @font-size-medium-x;
+            color: @color-text-black-d;
+          }
+          .text {
+            flex: 1;
+          }
+          .clear {
           }
         }
       }

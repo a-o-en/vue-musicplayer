@@ -24,6 +24,17 @@
       handle (index) {
         this.index = index
       }
+    },
+    watch: {
+      $route (to, from) {
+        if (to.path === '/singer') {
+          this.index = 0
+        } else if (to.path === '/recommend') {
+          this.index = 1
+        } else if (to.path === '/rank') {
+          this.index = 2
+        }
+      }
     }
   }
 </script>

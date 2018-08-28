@@ -68,6 +68,22 @@
         if (newQuery.length > 0 && newQuery !== oldQuery) {
           this.inputQuery = this.query
         }
+      },
+      $route (to, from) {
+        if (from.path === '/search') {
+          this.placeholder = ''
+          this.searching = false
+          this.$emit('leaveSearch')
+          this.$refs.query.style['background-color'] = '#2faf72'
+          this.$refs.houtui.style['width'] = '0'
+          this.clear()
+        } else if (to.path === '/search') {
+          this.placeholder = '搜索歌曲、歌手'
+          this.$refs.query.style['background'] = '#31c27c'
+          this.searching = true
+          this.$emit('enterSearch')
+          this.$refs.houtui.style['width'] = '24px'
+        }
       }
     }
   }

@@ -40,7 +40,7 @@ export function getDiscList2 () {
 }
 
 export function getDiscList1 () {
-  const url = 'http://192.168.42.167:3000/getDiscList'
+  const url = 'http://111.230.241.226:3000/getDiscList'
 
   const data = Object.assign({}, commomParams, {
     picmin: 1,

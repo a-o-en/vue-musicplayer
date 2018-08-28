@@ -18,7 +18,8 @@
   import Player from '@/components/player/player'
   import Tabs from '@/components/tabs/tabs'
   import Searchbox from 'base/search-box/search-box'
-  import {mapMutations} from 'vuex'
+  import {mapMutations, mapGetters} from 'vuex'
+
   export default {
     data () {
       return {
@@ -27,6 +28,15 @@
       }
     },
     name: 'App',
+    watch: {
+      $route (to, from) {
+        if (from.path === '/search') {
+          this.leaveSearch()
+        } else if (to.path === '/search') {
+          this.enterSearch()
+        }
+      }
+    },
     methods: {
       enterSearch () {
         this.searching = true
@@ -36,6 +46,7 @@
         }, 200)
       },
       leaveSearch () {
+        console.log('执行离开')
         this.$refs.tabsWrapper.style['transform'] = ''
         this.$refs.view.$el.style['top'] = '90px'
         this.setQuery('') // 清空 state.query
@@ -43,6 +54,9 @@
           this.searching = false
         }, 200)
       },
+      ...mapGetters([
+        'isSearching'
+      ]),
       ...mapMutations({
         'setQuery': 'SET_QUERY'
       })
